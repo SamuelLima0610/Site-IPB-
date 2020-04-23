@@ -1,0 +1,20 @@
+{
+  "name": "igreja",
+  "version": "1.0.0",
+  "description": "Site da igreja presbiteriana betel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "mariadb": "^2.3.1",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "sequelize": "^5.21.6"
+  }
+}

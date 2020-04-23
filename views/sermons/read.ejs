@@ -1,0 +1,49 @@
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+<div class="contact-form section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <br>
+                    <h2>Sermão</h2>
+                    <p>Listagem do sermões cadastrados!</p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Section Heading -->
+                <div class="col-12">
+                    <div class="contact-form-area">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Titulo</th>
+                                    <th>Livro</th>
+                                    <th>Pregador</th>
+                                    <th>Link</th>
+                                    <th>Upload</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% sermoes.forEach(sermao => { %>
+                                    <tr>
+                                        <td><%= sermao.id%></td>
+                                        <td><%= sermao.title%></td>
+                                        <td><%= sermao.book%></td>
+                                        <td><%= sermao.preacher%></td>
+                                        <td><%= sermao.link%></td>
+                                        <td><%= sermao.createdAt%></td>
+                                    </tr>
+                                <%})%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
