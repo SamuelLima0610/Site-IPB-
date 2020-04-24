@@ -10,7 +10,7 @@
                 <div class="section-heading">
                     <br>
                     <h2>Sermão</h2>
-                    <p>Cadastro do sermão, juntamente com o audio</p>
+                    <p>Editagem do sermão</p>
                 </div>
             </div>
         </div>
@@ -19,46 +19,42 @@
             <div class="col-12">
                 <!-- Contact Form Area -->
                 <div class="contact-form-area">
-                    <form action="/admin/sermao/criar" method="post" enctype="multipart/form-data">
+                    <form action="/admin/sermao/mudar" method="post">
                         <div class="row">
+                            <input type="hidden" value="<%= sermao.title%>" name="titleOld">
+                            <input type="hidden" value="<%= sermao.id%>" name="id">
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="contact-name">Titulo:</label>
-                                    <input type="text" class="form-control" id="contact-name" placeholder="Titulo" name="title">
+                                    <input type="text" class="form-control" id="contact-name" placeholder="Titulo" name="title" value="<%= sermao.title%>">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="contact-email">Livro:</label>
-                                    <input type="text" class="form-control" id="contact-email" placeholder="Livro" name="book">
+                                    <input type="text" class="form-control" id="contact-email" placeholder="Livro" name="book" value="<%= sermao.book%>">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">
                                     <label for="contact-email">Pregador:</label>
-                                    <input type="text" class="form-control" id="contact-email" placeholder="Pregador" name="preacher">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="form-group">
-                                    <label for="contact-number">Audio:</label>
-                                    <input type="file" class="form-control" name="file">
+                                    <input type="text" class="form-control" id="contact-email" placeholder="Pregador" name="preacher" value="<%= sermao.preacher%>">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="contact-email">Link do YouTube:</label>
-                                    <input type="text" class="form-control" id="contact-email" placeholder="Link" name="link">
+                                    <input type="text" class="form-control" id="contact-email" placeholder="Link" name="link" value="<%= sermao.link%>">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="message">Resumo:</label>
-                                    <textarea class="form-control" name="abstract" id="message" cols="30" rows="10" placeholder="Resumo do sermão"></textarea>
+                                    <textarea class="form-control" name="abstract" id="message" cols="30" rows="10" placeholder="Resumo do sermão"><%= sermao.abstract%></textarea>
                                 </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn crose-btn mt-15">Submeter</button>
+                                <button type="submit" class="btn crose-btn mt-15">Editar</button>
                             </div>
                         </div>
                     </form>

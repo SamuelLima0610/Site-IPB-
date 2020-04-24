@@ -9,6 +9,8 @@
                     <br>
                     <h2>Sermão</h2>
                     <p>Listagem do sermões cadastrados!</p>
+                    <hr>
+                    <a href="/admin/sermao/adicionar" type="submit" class="btn crose-btn">Adicionar Sermão</a>
                 </div>
             </div>
             <div class="row">
@@ -36,6 +38,14 @@
                                         <td><%= sermao.preacher%></td>
                                         <td><%= sermao.link%></td>
                                         <td><%= sermao.createdAt%></td>
+                                        <td>
+                                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning">Editar</a>
+                                            <form action="/admin/sermao/excluir" method="post" style="display: inline;">
+                                                <input type="hidden" name="title" value="<%= sermao.title%>">
+                                                <input type="hidden" name="id" value="<%= sermao.id%>">
+                                                <button class="btn btn-danger">Excluir</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 <%})%>
                             </tbody>

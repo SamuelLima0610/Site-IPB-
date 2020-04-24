@@ -44,6 +44,9 @@ jspm_packages/
 #database config
 database/
 
+#audios
+public/audio
+
 # TypeScript v1 declaration files
 typings/
 
