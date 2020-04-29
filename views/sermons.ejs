@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="sermons-content-thumbnail">
-                    <img src="img/bg-img/31.jpg" alt="">
+                    <img src="/img/bg-img/31.jpg" alt="">
                 </div>
                 <!-- Sermons Text -->
                 <div class="sermons-text text-center">
@@ -75,165 +75,48 @@
         </div>
 
         <div class="row">
+            <%sermons.forEach(sermon => { %>
             <!-- Single Latest Sermons -->
             <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/7.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>10</span>MAR</h6>
+                    <div class="single-latest-sermons mb-100">
+                        <div class="sermons-thumbnail">
+                            <img src="/img/bg-img/7.jpg" alt="">
+                            <!-- Date -->
+                            <div class="sermons-date">
+                                <h6><span><%= sermon.createdAt.getDate()%></span><%= months[sermon.createdAt.getMonth()]%></h6>
+                            </div>
+                        </div>
+                        <div class="sermons-content">
+                            <div class="sermons-cata">
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+                            </div>
+                            <h4>Start a New Way of Living</h4>
+                            <div class="sermons-meta-data">
+                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
+                                <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
+                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>Start a New Way of Living</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            <!-- Single Latest Sermons -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/8.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>11</span>MAY</h6>
-                        </div>
-                    </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>What Must I Do To Be Save</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 11 on <span>10:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Latest Sermons -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/9.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>15</span>MAY</h6>
-                        </div>
-                    </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>The Second Coming of Christ</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Latest Sermons -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/7.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>10</span>MAR</h6>
-                        </div>
-                    </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>Start a New Way of Living</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Latest Sermons -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/8.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>11</span>MAY</h6>
-                        </div>
-                    </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>What Must I Do To Be Save</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 11 on <span>10:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Latest Sermons -->
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="single-latest-sermons mb-100">
-                    <div class="sermons-thumbnail">
-                        <img src="img/bg-img/9.jpg" alt="">
-                        <!-- Date -->
-                        <div class="sermons-date">
-                            <h6><span>15</span>MAY</h6>
-                        </div>
-                    </div>
-                    <div class="sermons-content">
-                        <div class="sermons-cata">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                        </div>
-                        <h4>The Second Coming of Christ</h4>
-                        <div class="sermons-meta-data">
-                            <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                            <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                            <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                        </div>
-                    </div>
+            <%})%>
+        </div>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+                            <li class="page-item active"><a class="page-link" href="#"><%= page%></a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

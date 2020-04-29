@@ -24,7 +24,7 @@ app.use(express.static('public')); //usar arquivos estaticos
 
 //Routes
 app.use('/',staticController);
-app.use('/admin',sermaoController);
+app.use('/',sermaoController);
 
 app.listen('8000', () => {
     console.log('Esta rodando!');

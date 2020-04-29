@@ -11,6 +11,8 @@ const path = require('path');
 const fs = require('fs');
 //database sermon
 const Sermao = require('../Model/Sermao');
+//months
+let months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 
 //multer
 const upload = multer({
@@ -36,7 +38,7 @@ const upload = multer({
 });
 
 //Rota de criação
-router.get('/sermao/adicionar', (req,res) => {
+router.get('/admin/sermao/adicionar', (req,res) => {
     res.render('sermons/create');
 });
 
@@ -62,14 +64,14 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
 });
 
 //Rota de listagem
-router.get('/sermao', (req,res) => {
+router.get('/admin/sermao', (req,res) => {
     Sermao.findAll({raw:true}).then(sermoes => {
         res.render('sermons/read',{sermoes});
     });
 });
 
 //Rota de editagem
-router.get('/sermao/editar/:id' , (req,res) => {
+router.get('/admin/sermao/editar/:id' , (req,res) => {
     let id = req.params.id;
     Sermao.findByPk(id).then(sermao => {
         res.render('sermons/edit',{sermao});
@@ -96,6 +98,7 @@ router.post('/sermao/mudar' , (req,res) => {
     });
 });
 
+//rota para excluir
 router.post('/sermao/excluir', (req,res)=>{
     let id = req.body.id;
     let title = req.body.title;
@@ -107,5 +110,15 @@ router.post('/sermao/excluir', (req,res)=>{
         })
     })
 });
+
+//rota para visualizar um sermao mais detalhadamente
+router.get('/sermao/:id', (req,res) => {
+    let id = req.params.id;
+    Sermao.findByPk(id).then(sermon => {
+        Sermao.findAll({limit: 5, order: [['id','DESC']]}).then(sermons => {
+            res.render('sermons/sermonsDetail',{sermon, sermons, months});
+        });
+    });
+})
 
 module.exports = router;

@@ -19,7 +19,7 @@
             <div class="col-12">
                 <!-- Contact Form Area -->
                 <div class="contact-form-area">
-                    <form action="/admin/sermao/mudar" method="post">
+                    <form action="/sermao/mudar" method="post">
                         <div class="row">
                             <input type="hidden" value="<%= sermao.title%>" name="titleOld">
                             <input type="hidden" value="<%= sermao.id%>" name="id">
@@ -50,7 +50,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="message">Resumo:</label>
-                                    <textarea class="form-control" name="abstract" id="message" cols="30" rows="10" placeholder="Resumo do sermão"><%= sermao.abstract%></textarea>
+                                    <textarea class="form-control" name="abstract" id="message" cols="30" rows="10" placeholder="Resumo do sermão"></textarea>
                                 </div>
                             </div>
                             <div class="col-12 text-center">
@@ -61,8 +61,24 @@
                 </div>
             </div>
         </div>
+
+        <div id="content" style="display: none;">
+            <%- sermao.abstract%>
+        </div>
     </div>
 </div>
 <!-- ##### Add Sermon Form Area End ##### -->
 
 <%- include('../partials/footer.ejs') %>
+
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector:'#message',
+        activeEditor: true,
+        plugins: ['advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'],
+        init_instance_callback: () => {
+            tinymce.get('message').setContent($('#content').html())
+        }
+    })
+</script>

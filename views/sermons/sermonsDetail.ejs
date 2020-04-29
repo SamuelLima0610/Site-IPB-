@@ -1,5 +1,5 @@
-<%- include ('./partials/header.ejs') %>
-<%- include('./partials/navbar.ejs') %> 
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %> 
 <!-- ##### Breadcrumb Area Start ##### -->
 <div class="breadcrumb-area">
     <div class="container">
@@ -29,15 +29,16 @@
                     <!-- Sermons Details Area -->
                     <div class="single-post-details-area">
                         <div class="post-content">
-                            <h2 class="post-title mb-30">Start a New Way of Living</h2>
+                            <h2 class="post-title mb-30"><%= sermon.title%></h2>
                             <img class="mb-30" src="img/bg-img/32.jpg" alt="">
                             <!-- Catagory & Share -->
                             <div class="catagory-share-meta d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="sermons-cata">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                    <a href="https://<%= sermon.link %>" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
+                                    <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>-->
+                                    <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>-->
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+                                    <audio src="<%= sermon.audio%>"></audio>
                                 </div>
                                 <!-- Share -->
                                 <div class="share">
@@ -49,14 +50,20 @@
                                     <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                                 </div>
                             </div>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-                            <blockquote>
+                            <p><%- sermon.abstract%></p>
+                            <div class="comment-content">
+                                <h3>Audio do sermão:</h3>
+                                <audio src="<%= sermon.audio%>" controls>
+                                    <p>Seu navegador não suporta o elemento audio </p>
+                                </audio>
+                            </div>
+                            <!--<blockquote>
                                 <div class="blockquote-text">
                                     <h6>“There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.” </h6>
                                     <h6>Ollie Schneider - <span>Parson</span></h6>
                                 </div>
                             </blockquote>
-                            <p>He assignments are fast-paced and our services address client needs for efficiency and flexibility. Our staff is experienced in working with architects, interior design firms, engineers, developers and clients in the public and private sectors.</p>
+                            <p>He assignments are fast-paced and our services address client needs for efficiency and flexibility. Our staff is experienced in working with architects, interior design firms, engineers, developers and clients in the public and private sectors.</p> -->
                         </div>
                     </div>
 
@@ -144,53 +151,19 @@
                             <h6>Sermon News</h6>
                         </div>
 
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Weekly meeting in companies...</h6>
-                            </a>
-                            <div class="sermons-meta-data">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
+                        <% sermons.forEach(sermon => { %>
+                            <!-- Single Latest Posts -->
+                            <div class="single-latest-post">
+                                <a href="/sermao/<%= sermon.id%>" class="post-title">
+                                    <h6><%= sermon.title%></h6>
+                                </a>
+                                <div class="sermons-meta-data">
+                                    <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span><%= sermon.preacher%></span></p>
+                                    <!--<p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>-->
+                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i><%= sermon.createdAt.getDate()%> <%= months[sermon.createdAt.getMonth()]%></p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Six important methods to...</h6>
-                            </a>
-                            <div class="sermons-meta-data">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>New management method...</h6>
-                            </a>
-                            <div class="sermons-meta-data">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Seven ways to get ready for...</h6>
-                            </a>
-                            <div class="sermons-meta-data">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
-                                <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
-                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
-                            </div>
-                        </div>
+                        <% })%>
 
                     </div>
 
@@ -239,4 +212,4 @@
     </div>
 </section>
 <!-- ##### Subscribe Area End ##### -->
-<%- include('./partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
