@@ -48,17 +48,27 @@ router.get('/sermoes/:num', (req, res) => {
         limit: 6
     }).then(result => {
         let max = result.count;
-        let arrowleft = page - 1;
-        let next1 = ((page + 1) * 6) + 1
+        let arrowleft = parseInt(page) - 1;
+        let page2 = ((parseInt(page)) * 6) + 1;
+        let page3 = ((parseInt(page) + 1) * 6) + 1;
+        let arrowRight = ((parseInt(page) + 2) * 6) + 1;
         let left = false;
+        let right = false;
         let secondPage = false;
+        let thirdPage= false;
         if(arrowleft > 0){
             left = true
         }
-        if(next1 < max){
+        if(page2 <= max){
             secondPage = true;
+            if(page3 <= max){
+                thirdPage = true;
+                if(arrowRight < max){
+                    right = true
+                }
+            }
         }
-        res.render('sermons',{sermons: result.rows, page: parseInt(page) + 1, months});
+        res.render('sermons',{sermons: result.rows, page: parseInt(page), months, left, secondPage , thirdPage , right});
     });
 });
 

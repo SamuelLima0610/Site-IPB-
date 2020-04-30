@@ -93,9 +93,9 @@
                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
                             </div>
-                            <h4>Start a New Way of Living</h4>
+                            <h4><%= sermon.title%></h4>
                             <div class="sermons-meta-data">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>Jorge Malone</span></p>
+                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span><%= sermon.preacher%></span></p>
                                 <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p>
                                 <p><i class="fa fa-clock-o" aria-hidden="true"></i> March 10 on <span>9:00 am - 11:00 am</span></p>
                             </div>
@@ -110,11 +110,19 @@
                 <div class="pagination-area mt-70 mb-100">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                            <li class="page-item active"><a class="page-link" href="#"><%= page%></a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <% if(left){%>
+                                <li class="page-item"><a class="page-link" href="/sermoes/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/sermoes/<%= page%>"><%= page%></a></li>
+                            <% if(secondPage){ %>
+                                <li class="page-item"><a class="page-link" href="/sermoes/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(thirdPage){ %>
+                                <li class="page-item"><a class="page-link" href="/sermoes/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(right){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
                         </ul>
                     </nav>
                 </div>

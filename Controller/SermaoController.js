@@ -59,7 +59,7 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
         res.redirect('/admin/sermao');
     }else{
         Sermao.create({title,book,abstract,preacher})
-        res.redirect('/');
+        res.redirect('/admin/sermao');
     }
 });
 
