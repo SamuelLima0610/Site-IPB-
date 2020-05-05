@@ -21,7 +21,11 @@
                 <div class="contact-form-area">
                     <form action="/sermao/mudar" method="post">
                         <div class="row">
-                            <input type="hidden" value="<%= sermao.title%>" name="titleOld">
+                            <%if(sermao.audio != null){%>
+                                <input type="hidden" value="<%= sermao.title%>" name="titleOld">
+                            <%}else{%>
+                                <input type="hidden" value="sem" name="titleOld">
+                            <%}%>
                             <input type="hidden" value="<%= sermao.id%>" name="id">
                             <div class="col-12 col-lg-4">
                                 <div class="form-group">

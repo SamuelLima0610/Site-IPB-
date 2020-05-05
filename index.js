@@ -6,9 +6,12 @@ const bodyParser = require('body-parser');
 //Controller
 const staticController = require('./Controller/StaticPages');
 const sermaoController = require('./Controller/SermaoController');
+const categoryController = require('./Controller/CategoryController');
 //Database(Sequelize)
 const connection = require('./database/connection');
 const Sermao = require('./Model/Sermao');
+const Category = require('./Model/Category');
+const Notice = require('./Model/Notice');
 
 connection.authenticate().then(() => {
     console.log('Banco conectado');
@@ -25,6 +28,7 @@ app.use(express.static('public')); //usar arquivos estaticos
 //Routes
 app.use('/',staticController);
 app.use('/',sermaoController);
+app.use('/',categoryController);
 
 app.listen('8000', () => {
     console.log('Esta rodando!');

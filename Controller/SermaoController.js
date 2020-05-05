@@ -58,8 +58,12 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
         }
         res.redirect('/admin/sermao');
     }else{
-        Sermao.create({title,book,abstract,preacher})
-        res.redirect('/admin/sermao');
+        let link = req.body.link;
+        if(link == ''){
+            Sermao.create({title,book,abstract,preacher});
+        }else{
+            Sermao.create({title,book,abstract,preacher,link});
+        }
     }
 });
 
@@ -73,13 +77,15 @@ router.get('/admin/sermao', (req,res) => {
 //Rota de editagem
 router.get('/admin/sermao/editar/:id' , (req,res) => {
     let id = req.params.id;
-    Sermao.findByPk(id).then(sermao => {
-        res.render('sermons/edit',{sermao});
-    });
+    if(id != undefined){
+        Sermao.findByPk(id).then(sermao => {
+            res.render('sermons/edit',{sermao});
+        });
+    }
 });
 
 //Rota para salvar os novos dados de um sermão
-router.post('/sermao/mudar' , (req,res) => {
+router.post('/sermao/mudar', (req,res) => {
     let id = req.body.id;
     let titleOld = req.body.titleOld;
     let title = req.body.title;
@@ -87,28 +93,52 @@ router.post('/sermao/mudar' , (req,res) => {
     let preacher = req.body.preacher;
     let abstract = req.body.abstract;
     let link = req.body.link;
-    var dirOld = `./public/audio/${titleOld}.mp3`
-    var dirNew = `./public/audio/${title}.mp3`
-    var audio = `/audio/${title}.mp3`
-    fs.rename(dirOld, dirNew, (err) => {
-        if (err) throw err;
-        Sermao.update({title,book,preacher,link,abstract,audio},{where:{id}}).then(()=> {
-            res.redirect('/admin/sermao');
+    if(titleOld != 'sem'){
+        var dirOld = `./public/audio/${titleOld}.mp3`
+        var dirNew = `./public/audio/${title}.mp3`
+        var audio = `/audio/${title}.mp3`
+        fs.rename(dirOld, dirNew, (err) => {
+            if (err) throw err;
+            if(link == ''){
+                Sermao.update({title,book,preacher,abstract,audio},{where:{id}}).then(()=> {
+                    res.redirect('/admin/sermao');
+                });
+            }else{
+                Sermao.update({title,book,preacher,link,abstract,audio},{where:{id}}).then(()=> {
+                    res.redirect('/admin/sermao');
+                });
+            }
         });
-    });
+    }else{
+        if(link == ''){
+            Sermao.update({title,book,preacher,abstract},{where:{id}}).then(()=> {
+                res.redirect('/admin/sermao');
+            });
+        }else{
+            Sermao.update({title,book,preacher,link,abstract},{where:{id}}).then(()=> {
+                res.redirect('/admin/sermao');
+            });
+        }
+    }
 });
 
 //rota para excluir
 router.post('/sermao/excluir', (req,res)=>{
     let id = req.body.id;
     let title = req.body.title;
-    var dir = `./public/audio/${title}.mp3`
-    fs.unlink(dir , err =>{
-        if (err) throw err;
+    if(title != "null"){
+        var dir = `./public/audio/${title}.mp3`
+        fs.unlink(dir , err =>{
+            if (err) throw err;
+            Sermao.destroy({where:{id}}).then( () => {
+                res.redirect('/admin/sermao');
+            });
+        });
+    }else{
         Sermao.destroy({where:{id}}).then( () => {
             res.redirect('/admin/sermao');
-        })
-    })
+        });
+    }
 });
 
 //rota para visualizar um sermao mais detalhadamente

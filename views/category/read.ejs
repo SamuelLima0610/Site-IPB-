@@ -7,10 +7,10 @@
             <div class="col-12">
                 <div class="section-heading">
                     <br>
-                    <h2>Sermão</h2>
-                    <p>Listagem do sermões cadastrados!</p>
+                    <h2>Categoria</h2>
+                    <p>Listagem das categorias de avisos</p>
                     <hr>
-                    <a href="/admin/sermao/adicionar" type="submit" class="btn crose-btn">Adicionar Sermão</a>
+                    <a href="/admin/categoria/adicionar" type="submit" class="btn crose-btn">Adicionar Categoria</a>
                 </div>
             </div>
             <div class="row">
@@ -22,31 +22,18 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Titulo</th>
-                                    <th>Livro</th>
-                                    <th>Pregador</th>
-                                    <th>Link</th>
-                                    <th>Upload</th>
                                     <th>Opções</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% sermoes.forEach(sermao => { %>
+                                <% categories.forEach(category => { %>
                                     <tr>
-                                        <td><%= sermao.id%></td>
-                                        <td><%= sermao.title%></td>
-                                        <td><%= sermao.book%></td>
-                                        <td><%= sermao.preacher%></td>
-                                        <td><%= sermao.link%></td>
-                                        <td><%= sermao.createdAt%></td>
+                                        <td><%= category.id%></td>
+                                        <td><%= category.title%></td>
                                         <td>
-                                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning">Editar</a>
+                                            <a href="/admin/sermao/editar/<%= category.id%>" class="btn btn-warning">Editar</a>
                                             <form action="/sermao/excluir" method="post" style="display: inline;">
-                                                <%if(sermao.audio == null){ %>
-                                                    <input type="hidden" name="title" value="null">
-                                                <%}else{%>
-                                                    <input type="hidden" name="title" value="<%= sermao.title%>">
-                                                <%}%>
-                                                <input type="hidden" name="id" value="<%= sermao.id%>">
+                                                <input type="hidden" name="id" value="<%= category.id%>">
                                                 <button class="btn btn-danger">Excluir</button>
                                             </form>
                                         </td>

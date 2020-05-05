@@ -44,6 +44,7 @@ router.get('/sermoes/:num', (req, res) => {
         offset = (parseInt(page) -1) * 6;
     }
     Sermao.findAndCountAll({
+        order: [['id','DESC']],
         offset,
         limit: 6
     }).then(result => {
