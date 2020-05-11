@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const staticController = require('./Controller/StaticPages');
 const sermaoController = require('./Controller/SermaoController');
 const categoryController = require('./Controller/CategoryController');
+const noticeController = require('./Controller/NoticeController');
 //Database(Sequelize)
 const connection = require('./database/connection');
 const Sermao = require('./Model/Sermao');
@@ -29,6 +30,7 @@ app.use(express.static('public')); //usar arquivos estaticos
 app.use('/',staticController);
 app.use('/',sermaoController);
 app.use('/',categoryController);
+app.use('/',noticeController);
 
 app.listen('8000', () => {
     console.log('Esta rodando!');

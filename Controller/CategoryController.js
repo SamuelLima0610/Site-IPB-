@@ -22,9 +22,27 @@ router.post('/categoria/criar' , (req,res) => {
     });
 });
 
+router.get('/admin/categoria/editar/:id' , (req,res) => {
+    let id = req.params.id;
+    Category.findByPk(id).then(category => {
+        res.render('category/edit',{category});
+    });
+});
 
+router.post('/categoria/editar' , (req,res) => {
+    let id = req.body.id;
+    let title = req.body.title;
+    let slug = slugify(title);
+    Category.update({title: slug},{where:{id}}).then(() => {
+        res.redirect('/admin/categoria');
+    });
+});
 
-
-
+router.post('/categoria/excluir', (req,res) => {
+    let id = req.body.id;
+    Category.destroy({where: {id}}).then(() => {
+        res.redirect('/admin/categoria');
+    });
+});
 
 module.exports = router;

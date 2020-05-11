@@ -14,12 +14,20 @@ const Notice = connection.define('notices',{
     time:{
         type: Sequelize.STRING,
         allowNull: false
+    },
+    date:{
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    image:{
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 
 Notice.belongsTo(Category);
 Category.hasMany(Notice);
 
-Notice.sync({force: false});
+//Notice.sync({force: true});
 
 module.exports = Notice;

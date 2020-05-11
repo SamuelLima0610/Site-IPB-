@@ -1,0 +1,85 @@
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<!-- ##### Add Sermon Form Area Start ##### -->
+<div class="contact-form section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <br>
+                    <h2>Eventos</h2>
+                    <p>Cadastro de evento</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Contact Form Area -->
+                <div class="contact-form-area">
+                    <form action="/evento/salvar" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="contact-name">Titulo:</label>
+                                    <input type="text" class="form-control" id="contact-name" placeholder="Titulo" name="title">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="contact-email">Date:</label>
+                                    <input type="date" class="form-control" id="contact-email" name="date">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="contact-email">Começa ás: </label>
+                                    <input type="time" class="form-control" id="contact-email" name="time">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="contact-number">Imagem:</label>
+                                    <input type="file" class="form-control" name="file">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="contact-number">Categoria:</label>
+                                        <select name="category" class="form-control">
+                                            <%categories.forEach(category => { %>
+                                                <option value="<%=category.id%>"><%= category.title%></option>
+                                            <%})%>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message">Aviso:</label>
+                                    <textarea class="form-control" name="notice" id="message" cols="50" rows="50" placeholder="Resumo do sermão"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn crose-btn mt-15">Submeter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Add Sermon Form Area End ##### -->
+
+<%- include('../partials/footer.ejs') %>
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector:'#message',
+        plugins: ['advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'],
+    })
+</script>

@@ -1,0 +1,37 @@
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+<div class="contact-form section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <br>
+                    <h2>Categoria</h2>
+                    <p>Cadastro de categoria</p>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Contact Form Area -->
+                        <div class="contact-form-area">
+                            <form action="/categoria/editar" method="post">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="contact-name">Titulo:</label>
+                                        <input type="hidden" value="<%= category.id%>" name="id">
+                                        <input type="text" class="form-control" id="contact-name" placeholder="Titulo" name="title" value="<%= category.title%>">
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn crose-btn mt-15">Editar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
