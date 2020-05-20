@@ -29,6 +29,13 @@ const upload = multer({
     }
 });
 
+function pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+}
+
 //rota para listagem dos eventos
 router.get('/admin/eventos', (req,res) => {
     Notice.findAll({include:{model: Category}}).then(notices => {
@@ -113,11 +120,14 @@ router.post('/evento/excluir', (req,res)=>{
     });
 });
 
-function pad(number) {
-    if (number < 10) {
-      return '0' + number;
-    }
-    return number;
-  }
+//rota para visualizar o evento
+router.get("/evento/:id", (req,res) => {
+    let id = req.params.id;
+    Category.findAll().then(categories => {
+        Notice.findByPk(id).then(notice => {
+            res.render("notice/noticeDetail",{notice,categories});
+        })
+    })
+})
 
 module.exports = router;

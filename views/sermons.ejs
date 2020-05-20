@@ -110,17 +110,17 @@
                 <div class="pagination-area mt-70 mb-100">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <% if(left){%>
+                            <% if(pages[0]){%>
                                 <li class="page-item"><a class="page-link" href="/sermoes/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
                             <%}%>
                             <li class="page-item active"><a class="page-link" href="/sermoes/<%= page%>"><%= page%></a></li>
-                            <% if(secondPage){ %>
+                            <% if(pages[1]){ %>
                                 <li class="page-item"><a class="page-link" href="/sermoes/<%= page+1 %>"><%= page+1 %></a></li>
                             <%}%>
-                            <% if(thirdPage){ %>
+                            <% if(pages[2]){ %>
                                 <li class="page-item"><a class="page-link" href="/sermoes/<%= page+2 %>"><%= page+2 %></a></li>
                             <%}%>
-                            <% if(right){%>
+                            <% if(pages[3]){%>
                                 <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
                             <%}%>
                         </ul>

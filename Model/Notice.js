@@ -8,7 +8,7 @@ const Notice = connection.define('notices',{
         allowNull: false
     },
     notice:{
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     },
     time:{
