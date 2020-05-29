@@ -1,5 +1,5 @@
 <%- include ('../partials/header.ejs') %>
-<%- include('../partials/navbar.ejs') %>
+<%- include('../partials/navbarAuth.ejs') %>
 
 <!-- ##### Add Sermon Form Area Start ##### -->
 <div class="contact-form section-padding-0-100">
@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="contact-number">Categoria:</label>
-                                        <select name="category" class="form-control">
+                                        <select name="categoryId" class="form-control">
                                             <%categories.forEach(category => { %>
                                                 <option value="<%=category.id%>"><%= category.title%></option>
                                             <%})%>

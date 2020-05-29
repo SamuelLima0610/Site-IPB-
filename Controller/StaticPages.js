@@ -29,6 +29,10 @@ function thereIsPage(max,page){
     return pages;
 }
 
+function admin(req){
+    return req.session.user == undefined ? true: false;
+}
+
 //function to verificate the offset
 function offsetValue(page){
     if(isNaN(page) || page == 1 || page == 0){
@@ -41,34 +45,34 @@ function offsetValue(page){
 router.get('/', (req,res) => {
     Sermao.findAll({limit: 3, order: [['id','DESC']]}).then(sermons => {
         Notice.findAll({limit: 6, order: [['date','DESC']]}).then(notices => {
-            res.render('index',{sermons,months,notices});   
+            res.render('index',{sermons,months,notices,inside: admin(req)});   
         })
     }) ;
 });
 
 router.get('/sobre', (req,res) => {
-    res.render('about');    
+    res.render('about',{inside: admin(req)});    
 });
 
 router.get('/blog', (req,res) => {
-    res.render('blog');    
+    res.render('blog',{inside: admin(req)});    
 });
 
 router.get('/postagem', (req,res) => {
-    res.render('blogDetail'); 
+    res.render('blogDetail',{inside: admin(req)}); 
 });
 
 router.get('/audio', (req, res) => {
-    res.render('audio');
+    res.render('audio',{inside: admin(req)});
 });
 
 router.get('/contato', (req, res) => {
-    res.render('contact');
+    res.render('contact',{inside: admin(req)});
 });
 
 router.post('/filter', (req,res) => {
     let category = req.body.category;
-    res.redirect('/eventos/categoria/'+ category+'/1');
+    res.redirect('/eventos/categoria/'+ category+'/1',{inside: admin(req)});
 });
 
 router.get('/eventos/:num', (req, res) => {
@@ -94,7 +98,7 @@ router.get('/eventos/:num', (req, res) => {
                 type: "date",
                 data: date
             }
-            res.render('events',{information,months,notices: notices.rows, pages, page: parseInt(page), categories});
+            res.render('events',{information,months,notices: notices.rows, pages, page: parseInt(page), categories,inside: admin(req)});
         });
     })
 });
@@ -117,7 +121,7 @@ router.get('/eventos/categoria/:categoryChosen/:page', (req,res) => {
                     type: "category",
                     data: categoryChosen
                 }
-                res.render('events',{information,months,notices: notices.rows, pages, page: parseInt(page),categories})
+                res.render('events',{information,months,notices: notices.rows, pages, page: parseInt(page),categories,inside: admin(req)})
             });
         });
     });
@@ -133,12 +137,12 @@ router.get('/sermoes/:num', (req, res) => {
     }).then(result => {
         let max = result.count;
         let pages = thereIsPage(max,page);
-        res.render('sermons',{sermons: result.rows, page: parseInt(page), months, pages});
+        res.render('sermons',{sermons: result.rows, page: parseInt(page), months, pages,inside: admin(req)});
     });
 });
 
 router.get('/sermao', (req, res) => {
-    res.render('sermonsDetail');
+    res.render('sermonsDetail',{inside: admin(req)});
 });
 
 module.exports = router;

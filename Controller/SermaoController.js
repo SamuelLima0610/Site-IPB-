@@ -13,6 +13,8 @@ const fs = require('fs');
 const Sermao = require('../Model/Sermao');
 //months
 let months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+//Middleware de autenticação
+const auth = require('../Middleware/AuthMiddleware');
 
 //multer
 const upload = multer({
@@ -38,16 +40,13 @@ const upload = multer({
 });
 
 //Rota de criação
-router.get('/admin/sermao/adicionar', (req,res) => {
+router.get('/admin/sermao/adicionar', auth, (req,res) => {
     res.render('sermons/create');
 });
 
 //Rota post para armazenamento
 router.post('/sermao/criar', upload.single("file"), (req,res) => {
-    let title = req.body.title;
-    let abstract = req.body.abstract;
-    let book = req.body.book;
-    let preacher = req.body.preacher;
+    let {title,abstract,book,preacher} = req.body;
     if(req.file){
         let link = req.body.link;
         let audio = `/audio/${title}.mp3`;
@@ -69,14 +68,14 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
 });
 
 //Rota de listagem
-router.get('/admin/sermao', (req,res) => {
+router.get('/admin/sermao', auth,(req,res) => {
     Sermao.findAll({raw:true}).then(sermoes => {
         res.render('sermons/read',{sermoes});
     });
 });
 
 //Rota de editagem
-router.get('/admin/sermao/editar/:id' , (req,res) => {
+router.get('/admin/sermao/editar/:id' , auth,(req,res) => {
     let id = req.params.id;
     if(id != undefined){
         Sermao.findByPk(id).then(sermao => {
@@ -86,14 +85,8 @@ router.get('/admin/sermao/editar/:id' , (req,res) => {
 });
 
 //Rota para salvar os novos dados de um sermão
-router.post('/sermao/mudar', (req,res) => {
-    let id = req.body.id;
-    let titleOld = req.body.titleOld;
-    let title = req.body.title;
-    let book = req.body.book;
-    let preacher = req.body.preacher;
-    let abstract = req.body.abstract;
-    let link = req.body.link;
+router.post('/sermao/mudar', auth,(req,res) => {
+    let {id,titleOld,title,book,preacher,abstract,link} = req.body;
     if(titleOld != 'sem'){
         var dirOld = `./public/audio/${titleOld}.mp3`
         var dirNew = `./public/audio/${title}.mp3`
@@ -124,7 +117,7 @@ router.post('/sermao/mudar', (req,res) => {
 });
 
 //rota para excluir
-router.post('/sermao/excluir', (req,res)=>{
+router.post('/sermao/excluir', auth, (req,res)=>{
     let id = req.body.id;
     let title = req.body.title;
     if(title != "null"){
@@ -143,7 +136,7 @@ router.post('/sermao/excluir', (req,res)=>{
 });
 
 //rota para visualizar um sermao mais detalhadamente
-router.get('/sermao/:id', (req,res) => {
+router.get('/sermao/:id', auth,(req,res) => {
     let id = req.params.id;
     Sermao.findByPk(id).then(sermon => {
         Sermao.findAll({limit: 5, order: [['id','DESC']]}).then(sermons => {

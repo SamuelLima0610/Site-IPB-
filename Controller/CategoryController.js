@@ -1,21 +1,22 @@
 const express = require('express');
 const slugify = require('slugify');
 const router = express.Router();
+const auth = require('../Middleware/AuthMiddleware');
 const Category = require('../Model/Category');
 const Notice = require('../Model/Notice');
 
 //Rota de criação
-router.get('/admin/categoria' , (req,res) => {
+router.get('/admin/categoria' , auth ,(req,res) => {
     Category.findAll().then(categories => {
         res.render('category/read',{categories});
     });
 });
 
-router.get('/admin/categoria/adicionar' , (req,res) => {
+router.get('/admin/categoria/adicionar', auth, (req,res) => {
     res.render('category/create');
 });
 
-router.post('/categoria/criar' , (req,res) => {
+router.post('/categoria/criar' , auth, (req,res) => {
     let title = req.body.title;
     let slug = slugify(title);
     Category.create({title,slug}).then(() => {
@@ -23,7 +24,7 @@ router.post('/categoria/criar' , (req,res) => {
     });
 });
 
-router.get('/admin/categoria/editar/:id' , (req,res) => {
+router.get('/admin/categoria/editar/:id', auth, (req,res) => {
     let id = req.params.id;
     if(id != undefined){
         if(!isNaN(id)){
@@ -36,7 +37,7 @@ router.get('/admin/categoria/editar/:id' , (req,res) => {
     }
 });
 
-router.post('/categoria/editar' , (req,res) => {
+router.post('/categoria/editar', auth, (req,res) => {
     let {id, title} = req.body;
     let slug = slugify(title);
     Category.update({title: slug},{where:{id}}).then(() => {
@@ -44,7 +45,7 @@ router.post('/categoria/editar' , (req,res) => {
     });
 });
 
-router.post('/categoria/excluir', (req,res) => {
+router.post('/categoria/excluir', auth ,(req,res) => {
     let id = req.body.id;
     if(id != undefined){
         if(!isNaN(id)){

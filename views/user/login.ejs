@@ -1,5 +1,5 @@
 <%- include ('../partials/header.ejs') %>
-<%- include('../partials/navbarAuth.ejs') %>
+<%- include('../partials/navbar.ejs') %>
 <div class="contact-form section-padding-0-100">
     <div class="container">
         <div class="row">
@@ -7,22 +7,27 @@
             <div class="col-12">
                 <div class="section-heading">
                     <br>
-                    <h2>Categoria</h2>
-                    <p>Cadastro de categoria</p>
+                    <h2>Login</h2>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <!-- Contact Form Area -->
                         <div class="contact-form-area">
-                            <form action="/categoria/criar" method="post">
+                            <form action="/autenticacao" method="post">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="contact-name">Titulo:</label>
-                                        <input type="text" class="form-control" id="contact-name" placeholder="Titulo" name="title">
+                                        <label for="contact-name">Nome:</label>
+                                        <input type="text" class="form-control" id="contact-name" placeholder="Nome" name="nickname">
                                     </div>
-                                    <div class="col-12 text-center">
-                                        <button type="submit" class="btn crose-btn mt-15">Submeter</button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="contact-name">Senha:</label>
+                                        <input type="password" class="form-control" id="contact-name" name="password">
                                     </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn crose-btn mt-15">Submeter</button>
                                 </div>
                             </form>
                         </div>

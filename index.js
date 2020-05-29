@@ -1,6 +1,7 @@
 //express
 const express = require('express');
 const app = express();
+const session = require('express-session');
 //body-parser
 const bodyParser = require('body-parser');
 //Controller
@@ -8,11 +9,12 @@ const staticController = require('./Controller/StaticPages');
 const sermaoController = require('./Controller/SermaoController');
 const categoryController = require('./Controller/CategoryController');
 const noticeController = require('./Controller/NoticeController');
+const userController = require('./Controller/UserController');
 //Database(Sequelize)
 const connection = require('./database/connection');
-const Sermao = require('./Model/Sermao');
-const Category = require('./Model/Category');
-const Notice = require('./Model/Notice');
+
+//Sessions
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 3600000 }}));
 
 connection.authenticate().then(() => {
     console.log('Banco conectado');
@@ -31,7 +33,8 @@ app.use('/',staticController);
 app.use('/',sermaoController);
 app.use('/',categoryController);
 app.use('/',noticeController);
+app.use('/',userController);
 
 app.listen('8000', () => {
     console.log('Esta rodando!');
-})
+});

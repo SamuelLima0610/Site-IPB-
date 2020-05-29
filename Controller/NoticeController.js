@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const auth = require('../Middleware/AuthMiddleware');
 const Category = require('../Model/Category');
 const Notice = require('../Model/Notice');
 const path = require('path');
@@ -37,14 +38,14 @@ function pad(number) {
 }
 
 //rota para listagem dos eventos
-router.get('/admin/eventos', (req,res) => {
+router.get('/admin/eventos', auth, (req,res) => {
     Notice.findAll({include:{model: Category}}).then(notices => {
         res.render('notice/read',{notices});
     });
 });
 
 //rota para criação de evento
-router.get('/admin/evento/adicionar' , (req,res) => {
+router.get('/admin/evento/adicionar', auth, (req,res) => {
     Category.findAll().then(categories => {
         res.render('notice/create', {categories});
     });
@@ -52,11 +53,8 @@ router.get('/admin/evento/adicionar' , (req,res) => {
 
 //rota para salvamento dos dados
 router.post('/evento/salvar', upload.single("file"), (req,res) => {
-    let title = req.body.title;
+    let {title,time,categoryId,notice} = req.body;
     let date = new Date(req.body.date);
-    let time = req.body.time;
-    let categoryId = req.body.category;
-    let notice = req.body.notice;
     if(req.file){
         let image = `/img/eventos/${title}${path.extname(req.file.originalname)}`;
         Notice.create({title,date,time,categoryId,notice,image}).then(()=>{
@@ -68,7 +66,7 @@ router.post('/evento/salvar', upload.single("file"), (req,res) => {
 });
 
 //Rota de editagem
-router.get('/admin/evento/editar/:id' , (req,res) => {
+router.get('/admin/evento/editar/:id', auth, (req,res) => {
     let id = req.params.id;
     if(id != undefined){
         Category.findAll().then(categories => {
@@ -81,15 +79,9 @@ router.get('/admin/evento/editar/:id' , (req,res) => {
 });
 
 //rota para salvamento dos dados da edição
-router.post('/evento/mudar', (req,res) => {
-    let id = req.body.id;
-    let titleOld = req.body.titleOld;
-    let image = req.body.image;
-    let title = req.body.title;
+router.post('/evento/mudar', auth, (req,res) => {
+    let {id,titleOld, image, title,time,categoryId,notice} = req.body;
     let date = new Date(req.body.date);
-    let time = req.body.time;
-    let categoryId = req.body.category;
-    let notice = req.body.notice;
     let split = image.split('.');
     let extension = split[1];
     let imageNew = `/img/eventos/${title}.${extension}`;
@@ -105,10 +97,8 @@ router.post('/evento/mudar', (req,res) => {
 });
 
 //rota para excluir
-router.post('/evento/excluir', (req,res)=>{
-    let id = req.body.id;
-    let title = req.body.title;
-    let image = req.body.image;
+router.post('/evento/excluir', auth,(req,res)=>{
+    let {id,title,image} = rq.body;
     let split = image.split('.');
     let extension = split[1];
     let dir = `./public/img/eventos/${title}.${extension}`;
@@ -121,7 +111,7 @@ router.post('/evento/excluir', (req,res)=>{
 });
 
 //rota para visualizar o evento
-router.get("/evento/:id", (req,res) => {
+router.get("/evento/:id", auth, (req,res) => {
     let id = req.params.id;
     Category.findAll().then(categories => {
         Notice.findByPk(id).then(notice => {

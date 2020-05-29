@@ -7,10 +7,10 @@
             <div class="col-12">
                 <div class="section-heading">
                     <br>
-                    <h2>Eventos</h2>
-                    <p>Listagem dos eventos cadastrados!</p>
+                    <h2>Usuarios</h2>
+                    <p>Listagem dos usuarios</p>
                     <hr>
-                    <a href="/admin/evento/adicionar" type="submit" class="btn crose-btn">Adicionar Evento</a>
+                    <a href="/admin/usuario/adicionar" type="submit" class="btn crose-btn">Adicionar Usuarios</a>
                 </div>
             </div>
             <div class="row">
@@ -21,27 +21,19 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Titulo</th>
-                                    
-                                    <th>Data</th>
-                                    <th>Time</th>
+                                    <th>Usuario</th>
                                     <th>Opções</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% notices.forEach(notice => { %>
+                                <% users.forEach(user => { %>
                                     <tr>
-                                        <td><%= notice.id%></td>
-                                        <td><%= notice.title%></td>
-                                        
-                                        <td><%= notice.date.getDate()%>/<%= notice.date.getMonth() + 1%>/<%= notice.date.getFullYear()%></td>
-                                        <td><%= notice.time%></td>
+                                        <td><%= user.id%></td>
+                                        <td><%= user.nickname%></td>
                                         <td>
-                                            <a href="/admin/evento/editar/<%= notice.id%>" class="btn btn-warning">Editar</a>
-                                            <form action="/evento/excluir" method="post" style="display: inline;">
-                                                <input type="hidden" name="image" value="<%= notice.image%>">
-                                                <input type="hidden" name="title" value="<%= notice.title%>">
-                                                <input type="hidden" name="id" value="<%= notice.id%>">
+                                            <a href="/admin/usuario/editar/<%= user.id%>" class="btn btn-warning">Editar</a>
+                                            <form action="/usuario/excluir" method="post" style="display: inline;">
+                                                <input type="hidden" name="id" value="<%= user.id%>">
                                                 <button class="btn btn-danger">Excluir</button>
                                             </form>
                                         </td>
