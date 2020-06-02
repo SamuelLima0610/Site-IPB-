@@ -44,14 +44,14 @@ router.get('/admin/eventos', auth, (req,res) => {
     });
 });
 
-//rota para criação de evento
+//rota para criação de evento (GET)
 router.get('/admin/evento/adicionar', auth, (req,res) => {
     Category.findAll().then(categories => {
         res.render('notice/create', {categories});
     });
 });
 
-//rota para salvamento dos dados
+//rota para salvamento dos dados (POST)
 router.post('/evento/salvar', upload.single("file"), (req,res) => {
     let {title,time,categoryId,notice} = req.body;
     let date = new Date(req.body.date);
@@ -65,7 +65,7 @@ router.post('/evento/salvar', upload.single("file"), (req,res) => {
     }
 });
 
-//Rota de editagem
+//Rota de editagem (GET)
 router.get('/admin/evento/editar/:id', auth, (req,res) => {
     let id = req.params.id;
     if(id != undefined){
@@ -78,7 +78,7 @@ router.get('/admin/evento/editar/:id', auth, (req,res) => {
     }
 });
 
-//rota para salvamento dos dados da edição
+//rota para salvamento dos dados da edição (POST)
 router.post('/evento/mudar', auth, (req,res) => {
     let {id,titleOld, image, title,time,categoryId,notice} = req.body;
     let date = new Date(req.body.date);
@@ -96,7 +96,7 @@ router.post('/evento/mudar', auth, (req,res) => {
     });
 });
 
-//rota para excluir
+//rota para excluir (POST)
 router.post('/evento/excluir', auth,(req,res)=>{
     let {id,title,image} = rq.body;
     let split = image.split('.');
@@ -111,7 +111,7 @@ router.post('/evento/excluir', auth,(req,res)=>{
 });
 
 //rota para visualizar o evento
-router.get("/evento/:id", auth, (req,res) => {
+router.get("/evento/:id", (req,res) => {
     let id = req.params.id;
     Category.findAll().then(categories => {
         Notice.findByPk(id).then(notice => {

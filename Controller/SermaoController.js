@@ -39,12 +39,12 @@ const upload = multer({
     }
 });
 
-//Rota de criação
+//Rota de criação (GET)
 router.get('/admin/sermao/adicionar', auth, (req,res) => {
     res.render('sermons/create');
 });
 
-//Rota post para armazenamento
+//Rota post para armazenamento 
 router.post('/sermao/criar', upload.single("file"), (req,res) => {
     let {title,abstract,book,preacher} = req.body;
     if(req.file){
@@ -74,7 +74,7 @@ router.get('/admin/sermao', auth,(req,res) => {
     });
 });
 
-//Rota de editagem
+//Rota de editagem (GET)
 router.get('/admin/sermao/editar/:id' , auth,(req,res) => {
     let id = req.params.id;
     if(id != undefined){
@@ -84,7 +84,7 @@ router.get('/admin/sermao/editar/:id' , auth,(req,res) => {
     }
 });
 
-//Rota para salvar os novos dados de um sermão
+//Rota para salvar os novos dados de um sermão (POST)
 router.post('/sermao/mudar', auth,(req,res) => {
     let {id,titleOld,title,book,preacher,abstract,link} = req.body;
     if(titleOld != 'sem'){
@@ -116,7 +116,7 @@ router.post('/sermao/mudar', auth,(req,res) => {
     }
 });
 
-//rota para excluir
+//rota para excluir (POST)
 router.post('/sermao/excluir', auth, (req,res)=>{
     let id = req.body.id;
     let title = req.body.title;
@@ -136,7 +136,7 @@ router.post('/sermao/excluir', auth, (req,res)=>{
 });
 
 //rota para visualizar um sermao mais detalhadamente
-router.get('/sermao/:id', auth,(req,res) => {
+router.get('/sermao/:id', (req,res) => {
     let id = req.params.id;
     Sermao.findByPk(id).then(sermon => {
         Sermao.findAll({limit: 5, order: [['id','DESC']]}).then(sermons => {

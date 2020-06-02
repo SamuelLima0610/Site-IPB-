@@ -5,17 +5,19 @@ const auth = require('../Middleware/AuthMiddleware');
 const Category = require('../Model/Category');
 const Notice = require('../Model/Notice');
 
-//Rota de criação
+//Rota de listagem
 router.get('/admin/categoria' , auth ,(req,res) => {
     Category.findAll().then(categories => {
         res.render('category/read',{categories});
     });
 });
 
+//Rota de criação (GET)
 router.get('/admin/categoria/adicionar', auth, (req,res) => {
     res.render('category/create');
 });
 
+//Rota de criação (POST)
 router.post('/categoria/criar' , auth, (req,res) => {
     let title = req.body.title;
     let slug = slugify(title);
@@ -24,6 +26,7 @@ router.post('/categoria/criar' , auth, (req,res) => {
     });
 });
 
+//Rota de edição (GET)
 router.get('/admin/categoria/editar/:id', auth, (req,res) => {
     let id = req.params.id;
     if(id != undefined){
@@ -37,6 +40,7 @@ router.get('/admin/categoria/editar/:id', auth, (req,res) => {
     }
 });
 
+//Rota de edição (POST)
 router.post('/categoria/editar', auth, (req,res) => {
     let {id, title} = req.body;
     let slug = slugify(title);
@@ -45,6 +49,7 @@ router.post('/categoria/editar', auth, (req,res) => {
     });
 });
 
+//Rota de exclusão (POST)
 router.post('/categoria/excluir', auth ,(req,res) => {
     let id = req.body.id;
     if(id != undefined){
