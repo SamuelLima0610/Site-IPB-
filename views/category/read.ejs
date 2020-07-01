@@ -13,38 +13,31 @@
                     <a href="/admin/categoria/adicionar" type="submit" class="btn crose-btn">Adicionar Categoria</a>
                 </div>
             </div>
-            <div class="row">
-                <!-- Section Heading -->
-                <div class="col-12">
-                    <div class="contact-form-area">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Titulo</th>
-                                    <th>Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% categories.forEach(category => { %>
-                                    <tr>
-                                        <td><%= category.id%></td>
-                                        <td><%= category.title%></td>
-                                        <td>
-                                            <a href="/admin/categoria/editar/<%= category.id%>" class="btn btn-warning">Editar</a>
-                                            <form action="/categoria/excluir" method="post" style="display: inline;">
-                                                <input type="hidden" name="id" value="<%= category.id%>">
-                                                <button class="btn btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <%})%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
+        <table class="table table-bordered table-condensed">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="text-align: center;">Id</th>
+                    <th scope="col" style="text-align: center;">Titulo</th>
+                    <th scope="col" style="text-align: center;">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(category => { %>
+                    <tr>
+                        <td scope="row" style="text-align: center;"><%= category.id%></td>
+                        <td style="text-align: center;"><%= category.title%></td>
+                        <td>
+                            <a href="/admin/categoria/editar/<%= category.id%>" class="btn btn-warning">Editar</a>
+                            <form action="/categoria/excluir" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="<%= category.id%>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>

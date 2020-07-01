@@ -36,7 +36,7 @@ h6 {
 
 p {
   color: #636363;
-  font-family: "Crimson Text",serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   line-height: 1.8;
   font-weight: 400; }
@@ -492,26 +492,26 @@ img {
     z-index: 1;
     text-align: center; }
     .single-hero-slide .hero-slides-content h2 {
-      font-size: "Raleway", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       letter-spacing: 1px;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms;
       color: #ffffff;
       font-weight: 700;
-      font-size: 72px; }
+      font-size: 70px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .single-hero-slide .hero-slides-content h2 {
-          font-size: 48px; } }
+          font-size: 50px; } }
       @media only screen and (max-width: 767px) {
         .single-hero-slide .hero-slides-content h2 {
-          font-size: 30px; } }
+          font-size: 40px; } }
     .single-hero-slide .hero-slides-content p {
-      font-size: 20px;
+      font-size: 30px;
       color: #ffffff;
       margin-bottom: 40px; }
       @media only screen and (max-width: 767px) {
         .single-hero-slide .hero-slides-content p {
-          font-size: 14px; } }
+          font-size: 15px; } }
 
 /* :: 6.0 About Us Area CSS */
 .about-us-area {
@@ -1265,7 +1265,7 @@ img {
     position: relative;
     z-index: 1;
     padding-top: 70px;
-    background-color: #1d0b0b; }
+    background-color: #1C1C1C; }
     .footer-area .main-footer-area .single-footer-widget {
       position: relative;
       z-index: 1; }
@@ -1343,7 +1343,7 @@ img {
   .footer-area .copywrite-area {
     position: relative;
     z-index: 1;
-    background-color: #120606;
+    background-color: #1C1C1C;
     height: 50px;
     width: 100%; }
     @media only screen and (max-width: 767px) {
@@ -1402,7 +1402,7 @@ img {
           color: #aee6bf; }
     .breadcrumb-area .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
       color: #1f1f2c;
-      font-family: 'FontAwesome';
+      font-family: 'Montserrat', sans-serif;
       content: "\f105"; }
 
 /* :: 17.0 Blog Area CSS */
@@ -1948,14 +1948,13 @@ img {
     font-size: 18px;
     margin-bottom: 0;
     color: #fff;
-    font-family: "Raleway", Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase; }
   .testimony-wrap .position {
     font-size: 18px;
     color: #b3b3b3;
-    font-family: "Crimson Text", serif;
+    font-family: 'Montserrat', sans-serif;
     font-style: italic; 
   }
-
 
 /*# sourceMappingURL=style.css.map */

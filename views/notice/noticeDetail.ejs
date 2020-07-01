@@ -1,22 +1,5 @@
 <%- include ('../partials/header.ejs') %>
 <%- include('../partials/navbar.ejs') %> 
-<!-- ##### Breadcrumb Area Start ##### -->
-<div class="breadcrumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ##### Breadcrumb Area End ##### -->
 
 <!-- ##### Blog Content Area Start ##### -->
 <section class="blog-content-area section-padding-100">
@@ -51,92 +34,14 @@
 
                     <!-- ##### Single Widget Area ##### -->
                     <div class="single-widget-area">
-                        <div class="search-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" placeholder="Search Here">
-                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
                         <!-- Title -->
                         <div class="widget-title">
-                            <h6>Categories</h6>
+                            <h6>Categorias</h6>
                         </div>
                         <ol class="crose-catagories">
                             <%categories.forEach(category => {%>
                                 <li><a href="/eventos/categoria/<%=category.title%>/1"><i class="fa fa-angle-right" aria-hidden="true"></i><%= category.title%></a></li>
                             <%})%>
-                        </ol>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h6>Recent News</h6>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Weekly meeting in companies Think Room</h6>
-                            </a>
-                            <p class="post-date">November 11, 2017</p>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Six important methods to keep servers safe</h6>
-                            </a>
-                            <p class="post-date">November 11, 2017</p>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>New management method which rocks</h6>
-                            </a>
-                            <p class="post-date">November 11, 2017</p>
-                        </div>
-
-                        <!-- Single Latest Posts -->
-                        <div class="single-latest-post">
-                            <a href="#" class="post-title">
-                                <h6>Seven ways to get ready for a business contract</h6>
-                            </a>
-                            <p class="post-date">November 11, 2017</p>
-                        </div>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h6>Archives</h6>
-                        </div>
-                        <ol class="crose-archives">
-                            <li><a href="#">July 2015</a></li>
-                            <li><a href="#">March 2015</a></li>
-                        </ol>
-                    </div>
-
-                    <!-- ##### Single Widget Area ##### -->
-                    <div class="single-widget-area">
-                        <!-- Title -->
-                        <div class="widget-title">
-                            <h6>popular tags</h6>
-                        </div>
-                        <!-- Tags -->
-                        <ol class="popular-tags d-flex flex-wrap">
-                            <li><a href="#">Sermons</a></li>
-                            <li><a href="#">Cross</a></li>
-                            <li><a href="#">Pray</a></li>
-                            <li><a href="#">Holly Cross</a></li>
-                            <li><a href="#">Event</a></li>
                         </ol>
                     </div>
 

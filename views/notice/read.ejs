@@ -13,46 +13,37 @@
                     <a href="/admin/evento/adicionar" type="submit" class="btn crose-btn">Adicionar Evento</a>
                 </div>
             </div>
-            <div class="row">
-                <!-- Section Heading -->
-                <div class="col-12">
-                    <div class="contact-form-area">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Titulo</th>
-                                    
-                                    <th>Data</th>
-                                    <th>Time</th>
-                                    <th>Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% notices.forEach(notice => { %>
-                                    <tr>
-                                        <td><%= notice.id%></td>
-                                        <td><%= notice.title%></td>
-                                        
-                                        <td><%= notice.date.getDate()%>/<%= notice.date.getMonth() + 1%>/<%= notice.date.getFullYear()%></td>
-                                        <td><%= notice.time%></td>
-                                        <td>
-                                            <a href="/admin/evento/editar/<%= notice.id%>" class="btn btn-warning">Editar</a>
-                                            <form action="/evento/excluir" method="post" style="display: inline;">
-                                                <input type="hidden" name="image" value="<%= notice.image%>">
-                                                <input type="hidden" name="title" value="<%= notice.title%>">
-                                                <input type="hidden" name="id" value="<%= notice.id%>">
-                                                <button class="btn btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <%})%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="text-align: center;">Id</th>
+                    <th scope="col" style="text-align: center;">Titulo</th>
+                    <th scope="col" style="text-align: center;">Data</th>
+                    <th scope="col" style="text-align: center;">Time</th>
+                    <th scope="col" style="text-align: center;">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% notices.forEach(notice => { %>
+                    <tr>
+                        <td style="text-align: center;"><%= notice.id%></td>
+                        <td style="text-align: center;"><%= notice.title%></td>
+                        <td style="text-align: center;"><%= notice.date.getDate()%>/<%= notice.date.getMonth() + 1%>/<%= notice.date.getFullYear()%></td>
+                        <td style="text-align: center;"><%= notice.time%></td>
+                        <td>
+                            <a href="/admin/evento/editar/<%= notice.id%>" class="btn btn-warning">Editar</a>
+                            <form action="/evento/excluir" method="post" style="display: inline;">
+                                <input type="hidden" name="image" value="<%= notice.image%>">
+                                <input type="hidden" name="title" value="<%= notice.title%>">
+                                <input type="hidden" name="id" value="<%= notice.id%>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>

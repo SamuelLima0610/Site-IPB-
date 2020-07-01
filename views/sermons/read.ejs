@@ -13,51 +13,44 @@
                     <a href="/admin/sermao/adicionar" type="submit" class="btn crose-btn">Adicionar Sermão</a>
                 </div>
             </div>
-            <div class="row">
-                <!-- Section Heading -->
-                <div class="col-12">
-                    <div class="contact-form-area">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Titulo</th>
-                                    <th>Livro</th>
-                                    <th>Pregador</th>
-                                    <th>Link</th>
-                                    <th>Upload</th>
-                                    <th>Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% sermoes.forEach(sermao => { %>
-                                    <tr>
-                                        <td><%= sermao.id%></td>
-                                        <td><%= sermao.title%></td>
-                                        <td><%= sermao.book%></td>
-                                        <td><%= sermao.preacher%></td>
-                                        <td><%= sermao.link%></td>
-                                        <td><%= sermao.createdAt%></td>
-                                        <td>
-                                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning">Editar</a>
-                                            <form action="/sermao/excluir" method="post" style="display: inline;">
-                                                <%if(sermao.audio == null){ %>
-                                                    <input type="hidden" name="title" value="null">
-                                                <%}else{%>
-                                                    <input type="hidden" name="title" value="<%= sermao.title%>">
-                                                <%}%>
-                                                <input type="hidden" name="id" value="<%= sermao.id%>">
-                                                <button class="btn btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <%})%>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="text-align: center;">Id</th>
+                    <th scope="col" style="text-align: center;">Titulo</th>
+                    <th scope="col" style="text-align: center;">Livro</th>
+                    <th scope="col" style="text-align: center;">Pregador</th>
+                    <th scope="col" style="text-align: center;">Link</th>
+                    <th scope="col" style="text-align: center;">Upload</th>
+                    <th scope="col" style="text-align: center;">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% sermoes.forEach(sermao => { %>
+                    <tr>
+                        <td style="text-align: center;"><%= sermao.id%></td>
+                        <td style="text-align: center;"><%= sermao.title%></td>
+                        <td style="text-align: center;"><%= sermao.book%></td>
+                        <td style="text-align: center;"><%= sermao.preacher%></td>
+                        <td style="text-align: center;"><%= sermao.link%></td>
+                        <td style="text-align: center;"><%= sermao.createdAt%></td>
+                        <td>
+                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning">Editar</a>
+                            <form action="/sermao/excluir" method="post" style="display: inline;">
+                                <%if(sermao.audio == null){ %>
+                                    <input type="hidden" name="title" value="null">
+                                <%}else{%>
+                                    <input type="hidden" name="title" value="<%= sermao.title%>">
+                                <%}%>
+                                <input type="hidden" name="id" value="<%= sermao.id%>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>
