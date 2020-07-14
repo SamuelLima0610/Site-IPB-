@@ -10,6 +10,7 @@ const sermaoController = require('./Controller/SermaoController');
 const categoryController = require('./Controller/CategoryController');
 const noticeController = require('./Controller/NoticeController');
 const userController = require('./Controller/UserController');
+const bulletinController = require('./Controller/BulletinController');
 //Database(Sequelize)
 const connection = require('./database/connection');
 
@@ -34,6 +35,7 @@ app.use('/',sermaoController);
 app.use('/',categoryController);
 app.use('/',noticeController);
 app.use('/',userController);
+app.use('/',bulletinController);
 
 app.listen('8000', () => {
     console.log('Esta rodando!');

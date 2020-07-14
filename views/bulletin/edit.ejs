@@ -1,0 +1,44 @@
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbarAuth.ejs') %>
+
+<!-- ##### Add Sermon Form Area Start ##### -->
+<div class="contact-form section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <br>
+                    <h2>Boletin</h2>
+                    <p>Edição do boeltin</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Contact Form Area -->
+                <div class="contact-form-area">
+                    <form action="/boletins/mudar" method="post">
+                        <input type="text" value="<%= bulletin.id%>" name="id">
+                        <input type="text" value="<%= bulletin.bulletin%>" name="bulletin">
+                        <input type="text" value="<%= date%>" name="oldDate">
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label for="contact-email">Data:</label>
+                                    <input type="date" class="form-control" id="contact-email" value="<%=bulletin.date%>" name="date">
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn crose-btn mt-15">Submeter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Add Sermon Form Area End ##### -->
+<%- include('../partials/footer.ejs') %>

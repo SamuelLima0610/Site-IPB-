@@ -98,7 +98,7 @@ router.post('/evento/mudar', auth, (req,res) => {
 
 //rota para excluir (POST)
 router.post('/evento/excluir', auth,(req,res)=>{
-    let {id,title,image} = rq.body;
+    let {id,title,image} = req.body;
     let split = image.split('.');
     let extension = split[1];
     let dir = `./public/img/eventos/${title}.${extension}`;

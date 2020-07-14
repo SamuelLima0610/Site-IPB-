@@ -1,10 +1,12 @@
 const express = require('express');
 const Sequelize = require('sequelize');
+const fs = require('fs');
 const router = express.Router();
 //database sermon
 const Sermao = require('../Model/Sermao');
 const Notice = require('../Model/Notice');
 const Category = require('../Model/Category');
+const Bulletin = require('../Model/Bulletin');
 let months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 
 //function to verificate which pages exists
@@ -29,9 +31,9 @@ function thereIsPage(max,page){
     return pages;
 }
 
-function admin(req){
+/*function admin(req){
     return req.session.user == undefined ? true: false;
-}
+}*/
 
 //function to verificate the offset
 function offsetValue(page){
@@ -139,6 +141,31 @@ router.get('/sermoes/:num', (req, res) => {
         let pages = thereIsPage(max,page);
         res.render('sermons',{sermons: result.rows, page: parseInt(page), months, pages});
     });
+});
+
+router.get('/boletins/:num', (req, res) => {
+    let page = req.params.num;
+    let offset = offsetValue(page);
+    Bulletin.findAndCountAll({
+        order: [['id','DESC']],
+        offset,
+        limit: 6
+    }).then(result => {
+        let max = result.count;
+        let pages = thereIsPage(max,page);
+        res.render('bulletins',{bulletins: result.rows, page: parseInt(page), months, pages});
+    });
+});
+
+//Rota de editagem (GET)
+router.get('/boletins/:id/download',  (req,res) => {
+    let id = req.params.id;
+    if(id != undefined){
+        Bulletin.findByPk(id).then(bulletin => {
+            let file = `${process.cwd()}/public/${bulletin.bulletin}`;
+            res.download(file);
+        });
+    }
 });
 
 router.get('/sermao', (req, res) => {

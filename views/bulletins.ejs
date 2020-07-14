@@ -1,0 +1,87 @@
+<%- include ('./partials/header.ejs') %>
+<%- include('./partials/navbar.ejs') %> 
+<!-- ##### Latest Sermons Area Start ##### -->
+<section class="latest-sermons-area">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Boletins:</h2>
+                    <p>Baixe os boletins: </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <%bulletins.forEach(bulletin => { %>
+            <!-- Single Latest Sermons -->
+            <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-latest-sermons mb-100">
+                        <div class="sermons-thumbnail">
+                            <img src="/img/bg-img/7.jpg" alt="">
+                            <!-- Date -->
+                            <div class="sermons-date">
+                                <h6><span><%= bulletin.date.getDate() + 1%></span><%= months[bulletin.date.getMonth()]%></h6>
+                            </div>
+                        </div>
+                        <div class="sermons-content">
+                            <a href="/boletins/<%=bulletin.id%>/download"><h4>Baixar</h4></a>
+                        </div>
+                    </div>
+            </div>
+            <%})%>
+        </div>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if(pages[0]){%>
+                                <li class="page-item"><a class="page-link" href="/boletins/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/boletins/<%= page%>"><%= page%></a></li>
+                            <% if(pages[1]){ %>
+                                <li class="page-item"><a class="page-link" href="/boletins/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(pages[2]){ %>
+                                <li class="page-item"><a class="page-link" href="/boletins/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(pages[3]){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Latest Sermons Area End ##### -->
+
+<!-- ##### Subscribe Area Start #####
+<section class="subscribe-area">
+    <div class="container">
+        <div class="row align-items-center">
+            Subscribe Text
+            <div class="col-12 col-lg-6">
+                <div class="subscribe-text">
+                    <h3>Subscribe To Our Newsletter</h3>
+                    <h6>Subcribe Us And Tell Us About Your Story</h6>
+                </div>
+            </div>
+            Subscribe Form
+            <div class="col-12 col-lg-6">
+                <div class="subscribe-form text-right">
+                    <form action="#">
+                        <input type="email" name="subscribe-email" id="subscribeEmail" placeholder="Your Email">
+                        <button type="submit" class="btn crose-btn">subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+##### Subscribe Area End ##### -->
+<%- include('./partials/footer.ejs') %>

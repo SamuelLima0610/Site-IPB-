@@ -1,0 +1,45 @@
+<%- include ('../partials/header.ejs') %>
+<%- include('../partials/navbarAuth.ejs') %>
+<div class="contact-form section-padding-0-100">
+    <div class="container">
+        <div class="row">
+            <!-- Section Heading -->
+            <div class="col-12">
+                <div class="section-heading">
+                    <br>
+                    <h2>Boletins</h2>
+                    <p>Listagem dos boletins cadastrados!</p>
+                    <hr>
+                    <a href="/admin/boletins/adicionar" type="submit" class="btn crose-btn">Adicionar boletin</a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="text-align: center;">Id</th>
+                    <th scope="col" style="text-align: center;">Data</th>
+                    <th scope="col" style="text-align: center;">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% bulletins.forEach(bulletin => { %>
+                    <tr>
+                        <td style="text-align: center;"><%= bulletin.id%></td>
+                        <td style="text-align: center;"><%= bulletin.date.getDate() + 1%>/<%= bulletin.date.getMonth() + 1%>/<%= bulletin.date.getFullYear()%></td>
+                        <td>
+                            <a href="/admin/boletins/editar/<%= bulletin.id%>" class="btn btn-warning">Editar</a>
+                            <form action="/boletins/excluir" method="post" style="display: inline;">
+                                <input type="hidden" name="date" value="<%= bulletin.date%>">
+                                <input type="hidden" name="bulletin" value="<%= bulletin.bulletin%>">
+                                <input type="hidden" name="id" value="<%= bulletin.id%>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
