@@ -28,6 +28,6 @@ const Sermao = connection.define('sermons',{
     }
 });
 
-//Sermao.sync({force:false});
+Sermao.sync({force:false});
 
 module.exports = Sermao;

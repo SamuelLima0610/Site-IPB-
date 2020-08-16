@@ -36,21 +36,45 @@
                         <td style="text-align: center;"><%= sermao.link%></td>
                         <td style="text-align: center;"><%= sermao.createdAt%></td>
                         <td>
-                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning">Editar</a>
-                            <form action="/sermao/excluir" method="post" style="display: inline;">
+                            <a href="/admin/sermao/editar/<%= sermao.id%>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                            <form action='/sermao/excluir' method="post" style="display: inline;">
                                 <%if(sermao.audio == null){ %>
                                     <input type="hidden" name="title" value="null">
                                 <%}else{%>
                                     <input type="hidden" name="title" value="<%= sermao.title%>">
                                 <%}%>
                                 <input type="hidden" name="id" value="<%= sermao.id%>">
-                                <button class="btn btn-danger">Excluir</button>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
                 <%})%>
             </tbody>
         </table>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if(pages[0]){%>
+                                <li class="page-item"><a class="page-link" href="/admin/sermao/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/admin/sermao/<%= page%>"><%= page%></a></li>
+                            <% if(pages[1]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/sermao/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(pages[2]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/sermao/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(pages[3]){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>

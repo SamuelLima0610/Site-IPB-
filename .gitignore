@@ -41,14 +41,8 @@ build/Release
 node_modules/
 jspm_packages/
 
-#database config
-database/
-
-#images
-public/img/eventos
-
-#audios
-public/audio
+#.env file
+.env
 
 # TypeScript v1 declaration files
 typings/

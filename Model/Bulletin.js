@@ -13,6 +13,6 @@ const Bulletin = connection.define('bulletins',{
 });
 
 
-//Bulletin.sync({force: true});
+Bulletin.sync({force: false});
 
 module.exports = Bulletin;

@@ -13,35 +13,52 @@
                     <a href="/admin/usuario/adicionar" type="submit" class="btn crose-btn">Adicionar Usuarios</a>
                 </div>
             </div>
-            <div class="row">
-                <!-- Section Heading -->
-                <div class="col-12">
-                    <div class="contact-form-area">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Usuario</th>
-                                    <th>Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% users.forEach(user => { %>
-                                    <tr>
-                                        <td><%= user.id%></td>
-                                        <td><%= user.nickname%></td>
-                                        <td>
-                                            <a href="/admin/usuario/editar/<%= user.id%>" class="btn btn-warning">Editar</a>
-                                            <form action="/usuario/excluir" method="post" style="display: inline;">
-                                                <input type="hidden" name="id" value="<%= user.id%>">
-                                                <button class="btn btn-danger">Excluir</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                <%})%>
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Usuario</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.id%></td>
+                        <td><%= user.nickname%></td>
+                        <td>
+                            <a href="/admin/usuario/editar/<%= user.id%>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                            <form action='/admin/usuario/delete' method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="<%= user.id%>">
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if(pages[0]){%>
+                                <li class="page-item"><a class="page-link" href="/admin/usuario/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/admin/usuario/<%= page%>"><%= page%></a></li>
+                            <% if(pages[1]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/usuario/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(pages[2]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/usuario/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(pages[3]){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

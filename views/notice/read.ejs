@@ -32,18 +32,42 @@
                         <td style="text-align: center;"><%= notice.date.getDate()%>/<%= notice.date.getMonth() + 1%>/<%= notice.date.getFullYear()%></td>
                         <td style="text-align: center;"><%= notice.time%></td>
                         <td>
-                            <a href="/admin/evento/editar/<%= notice.id%>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/evento/editar/<%= notice.id%>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             <form action="/evento/excluir" method="post" style="display: inline;">
                                 <input type="hidden" name="image" value="<%= notice.image%>">
                                 <input type="hidden" name="title" value="<%= notice.title%>">
                                 <input type="hidden" name="id" value="<%= notice.id%>">
-                                <button class="btn btn-danger">Excluir</button>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
                 <%})%>
             </tbody>
         </table>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if(pages[0]){%>
+                                <li class="page-item"><a class="page-link" href="/admin/eventos/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/admin/eventos/<%= page%>"><%= page%></a></li>
+                            <% if(pages[1]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/eventos/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(pages[2]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/eventos/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(pages[3]){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>

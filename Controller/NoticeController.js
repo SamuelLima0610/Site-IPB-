@@ -37,10 +37,50 @@ function pad(number) {
     return number;
 }
 
+//function to verificate which pages exists
+function thereIsPage(max,page){
+    let arrowleft = parseInt(page) - 1;
+    let page2 = ((parseInt(page)) * 6) + 1;
+    let page3 = ((parseInt(page) + 1) * 6) + 1;
+    let arrowRight = ((parseInt(page) + 2) * 6) + 1;
+    let pages = [false,false,false,false];
+    if(arrowleft > 0){
+        pages[0] = true
+    }
+    if(page2 <= max){
+        pages[1] = true;
+        if(page3 <= max){
+            pages[2] = true;
+            if(arrowRight < max){
+                pages[3] = true
+            }
+        }
+    }
+    return pages;
+}
+
+//function to verificate the offset
+function offsetValue(page){
+    if(isNaN(page) || page == 1 || page == 0){
+        return 0;
+    }else{
+        return (parseInt(page) -1) * 6;
+    }
+}
+
 //rota para listagem dos eventos
-router.get('/admin/eventos', auth, (req,res) => {
-    Notice.findAll({include:{model: Category}}).then(notices => {
-        res.render('notice/read',{notices});
+router.get('/admin/eventos/:num', auth, (req,res) => {
+    let page = req.params.num;
+    let offset = offsetValue(page);
+    Notice.findAndCountAll({
+        include:{model: Category},
+        order: [['id','DESC']],
+        offset,
+        limit: 6
+    }).then(result => {
+        let max = result.count;
+        let pages = thereIsPage(max,page);
+        res.render('notice/read',{notices: result.rows, page: parseInt(page), pages});
     });
 });
 
@@ -58,7 +98,7 @@ router.post('/evento/salvar', upload.single("file"), (req,res) => {
     if(req.file){
         let image = `/img/eventos/${title}${path.extname(req.file.originalname)}`;
         Notice.create({title,date,time,categoryId,notice,image}).then(()=>{
-            res.redirect('/admin/eventos');
+            res.redirect('/admin/eventos/0');
         });
     }else{
         res.redirect('/admin/evento/adicionar');
@@ -90,7 +130,7 @@ router.post('/evento/mudar', auth, (req,res) => {
     fs.rename(dirOld, dirNew, (err) => {
         if (err) throw err;
         Notice.update({title,date,time,categoryId,notice,image: imageNew},{where:{id}}).then(()=> {
-            res.redirect('/admin/eventos');
+            res.redirect('/admin/eventos/0');
         });
 
     });
@@ -105,7 +145,7 @@ router.post('/evento/excluir', auth,(req,res)=>{
     fs.unlink(dir , err =>{
         if (err) throw err;
         Notice.destroy({where:{id}}).then( () => {
-            res.redirect('/admin/eventos');
+            res.redirect('/admin/eventos/0');
         });
     });
 });

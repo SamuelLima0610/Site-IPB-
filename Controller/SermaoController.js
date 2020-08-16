@@ -16,6 +16,37 @@ let months = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV',
 //Middleware de autenticação
 const auth = require('../Middleware/AuthMiddleware');
 
+//function to verificate which pages exists
+function thereIsPage(max,page){
+    let arrowleft = parseInt(page) - 1;
+    let page2 = ((parseInt(page)) * 6) + 1;
+    let page3 = ((parseInt(page) + 1) * 6) + 1;
+    let arrowRight = ((parseInt(page) + 2) * 6) + 1;
+    let pages = [false,false,false,false];
+    if(arrowleft > 0){
+        pages[0] = true
+    }
+    if(page2 <= max){
+        pages[1] = true;
+        if(page3 <= max){
+            pages[2] = true;
+            if(arrowRight < max){
+                pages[3] = true
+            }
+        }
+    }
+    return pages;
+}
+
+//function to verificate the offset
+function offsetValue(page){
+    if(isNaN(page) || page == 1 || page == 0){
+        return 0;
+    }else{
+        return (parseInt(page) -1) * 6;
+    }
+}
+
 //multer
 const upload = multer({
     // Como deve ser feito o armazenamento dos arquivos?
@@ -55,7 +86,7 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
         }else{
             Sermao.create({title,book,abstract,preacher,audio,link});
         }
-        res.redirect('/admin/sermao');
+        res.redirect('/admin/sermao/0');
     }else{
         let link = req.body.link;
         if(link == ''){
@@ -63,15 +94,24 @@ router.post('/sermao/criar', upload.single("file"), (req,res) => {
         }else{
             Sermao.create({title,book,abstract,preacher,link});
         }
-        res.redirect('/admin/sermao');
+        res.redirect('/admin/sermao/0');
     }
 });
 
 //Rota de listagem
-router.get('/admin/sermao', auth,(req,res) => {
-    Sermao.findAll({raw:true}).then(sermoes => {
-        res.render('sermons/read',{sermoes});
+router.get('/admin/sermao/:num', auth,(req,res) => {
+    let page = req.params.num;
+    let offset = offsetValue(page);
+    Sermao.findAndCountAll({
+        order: [['id','DESC']],
+        offset,
+        limit: 6
+    }).then(result => {
+        let max = result.count;
+        let pages = thereIsPage(max,page);
+        res.render('sermons/read',{sermoes: result.rows, page: parseInt(page), pages});
     });
+
 });
 
 //Rota de editagem (GET)
@@ -95,22 +135,22 @@ router.post('/sermao/mudar', auth,(req,res) => {
             if (err) throw err;
             if(link == ''){
                 Sermao.update({title,book,preacher,abstract,audio},{where:{id}}).then(()=> {
-                    res.redirect('/admin/sermao');
+                    res.redirect('/admin/sermao/0');
                 });
             }else{
                 Sermao.update({title,book,preacher,link,abstract,audio},{where:{id}}).then(()=> {
-                    res.redirect('/admin/sermao');
+                    res.redirect('/admin/sermao/0');
                 });
             }
         });
     }else{
         if(link == ''){
             Sermao.update({title,book,preacher,abstract},{where:{id}}).then(()=> {
-                res.redirect('/admin/sermao');
+                res.redirect('/admin/sermao/0');
             });
         }else{
             Sermao.update({title,book,preacher,link,abstract},{where:{id}}).then(()=> {
-                res.redirect('/admin/sermao');
+                res.redirect('/admin/sermao/0');
             });
         }
     }
@@ -125,12 +165,12 @@ router.post('/sermao/excluir', auth, (req,res)=>{
         fs.unlink(dir , err =>{
             if (err) throw err;
             Sermao.destroy({where:{id}}).then( () => {
-                res.redirect('/admin/sermao');
+                res.redirect('/admin/sermao/0');
             });
         });
     }else{
         Sermao.destroy({where:{id}}).then( () => {
-            res.redirect('/admin/sermao');
+            res.redirect('/admin/sermao/0');
         });
     }
 });

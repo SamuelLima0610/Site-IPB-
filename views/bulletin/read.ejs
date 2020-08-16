@@ -28,18 +28,42 @@
                         <td style="text-align: center;"><%= bulletin.id%></td>
                         <td style="text-align: center;"><%= bulletin.date.getDate() + 1%>/<%= bulletin.date.getMonth() + 1%>/<%= bulletin.date.getFullYear()%></td>
                         <td>
-                            <a href="/admin/boletins/editar/<%= bulletin.id%>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/boletins/editar/<%= bulletin.id%>" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                             <form action="/boletins/excluir" method="post" style="display: inline;">
                                 <input type="hidden" name="date" value="<%= bulletin.date%>">
                                 <input type="hidden" name="bulletin" value="<%= bulletin.bulletin%>">
                                 <input type="hidden" name="id" value="<%= bulletin.id%>">
-                                <button class="btn btn-danger">Excluir</button>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
                 <%})%>
             </tbody>
         </table>
+        <div class="row">
+            <!--Navegation-->
+            <div class="col-12">
+                <div class="pagination-area mt-70 mb-100">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if(pages[0]){%>
+                                <li class="page-item"><a class="page-link" href="/admin/boletins/<%= page-1%>"><i class="fa fa-angle-left"></i></a></li>
+                            <%}%>
+                            <li class="page-item active"><a class="page-link" href="/admin/boletins/<%= page%>"><%= page%></a></li>
+                            <% if(pages[1]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/boletins/<%= page+1 %>"><%= page+1 %></a></li>
+                            <%}%>
+                            <% if(pages[2]){ %>
+                                <li class="page-item"><a class="page-link" href="/admin/boletins/<%= page+2 %>"><%= page+2 %></a></li>
+                            <%}%>
+                            <% if(pages[3]){%>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <%- include('../partials/footer.ejs') %>

@@ -8,6 +8,37 @@ const path = require('path');
 const fs = require('fs');
 const Bulletin = require('../Model/Bulletin')
 
+//function to verificate which pages exists
+function thereIsPage(max,page){
+    let arrowleft = parseInt(page) - 1;
+    let page2 = ((parseInt(page)) * 6) + 1;
+    let page3 = ((parseInt(page) + 1) * 6) + 1;
+    let arrowRight = ((parseInt(page) + 2) * 6) + 1;
+    let pages = [false,false,false,false];
+    if(arrowleft > 0){
+        pages[0] = true
+    }
+    if(page2 <= max){
+        pages[1] = true;
+        if(page3 <= max){
+            pages[2] = true;
+            if(arrowRight < max){
+                pages[3] = true
+            }
+        }
+    }
+    return pages;
+}
+
+//function to verificate the offset
+function offsetValue(page){
+    if(isNaN(page) || page == 1 || page == 0){
+        return 0;
+    }else{
+        return (parseInt(page) -1) * 6;
+    }
+}
+
 //multer
 const upload = multer({
     // Como deve ser feito o armazenamento dos arquivos?
@@ -56,9 +87,17 @@ function month(month){
 }
 
 //rota para listagem dos boletins
-router.get('/admin/boletins', auth, (req,res) => {
-    Bulletin.findAll().then(bulletins => {
-        res.render('bulletin/read',{bulletins});
+router.get('/admin/boletins/:num', auth, (req,res) => {
+    let page = req.params.num;
+    let offset = offsetValue(page);
+    Bulletin.findAndCountAll({
+        order: [['id','DESC']],
+        offset,
+        limit: 6
+    }).then(result => {
+        let max = result.count;
+        let pages = thereIsPage(max,page);
+        res.render('bulletin/read',{bulletins: result.rows, page: parseInt(page), pages});
     });
 });
 
@@ -73,7 +112,7 @@ router.post('/boletins/salvar', upload.single("file"), (req,res) => {
     if(req.file){
         let bulletin = `/boletin/${req.body.date}${path.extname(req.file.originalname)}`;
         Bulletin.create({bulletin,date}).then(()=>{
-            res.redirect('/admin/boletins');
+            res.redirect('/admin/boletins/0');
         });
     }else{
         res.redirect('/admin/boletins/adicionar');
@@ -103,7 +142,7 @@ router.post('/boletins/mudar', auth, (req,res) => {
     fs.rename(dirOld, dirNew, (err) => {
         if (err) throw err;
         Bulletin.update({bulletinNew,date},{where:{id}}).then(()=> {
-            res.redirect('/admin/boletins');
+            res.redirect('/admin/boletins/0');
         });
     });
 });
@@ -118,7 +157,7 @@ router.post('/boletins/excluir', auth,(req,res)=>{
     fs.unlink(dir , err =>{
         if (err) throw err;
         Bulletin.destroy({where:{id}}).then( () => {
-            res.redirect('/admin/boletins');
+            res.redirect('/admin/boletins/0');
         });
     });
 });
